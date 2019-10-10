@@ -21,47 +21,40 @@ import java.util.*
 
 class ScrollingActivity : AppCompatActivity(), HomeAISdkClient, IScreen {
     override fun previous() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun isOn(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun seek(p0: Boolean, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun next() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun selectItem(p0: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return false
     }
 
     override fun resume() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun setResolution(p0: Boolean, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onVoiceWakeup(p0: ValueCallback<Boolean>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun navigateBackforward(p0: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return false
     }
 
     override fun isPlaying(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return false
     }
 
     override fun setPlayerStateListener(p0: IPlayerStateListener?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun playVideo(
@@ -71,131 +64,100 @@ class ScrollingActivity : AppCompatActivity(), HomeAISdkClient, IScreen {
         p3: String?,
         p4: MutableList<String>?
     ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPage(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun pause() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun destroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun volumnAdjust(p0: Boolean, p1: Float) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun mute(p0: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showSearchResult(p0: ItemList?, p1: Int, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun switchPage(p0: Boolean, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onVoiceSleep(p0: ValueCallback<Boolean>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun stop() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun playEpisode(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showNotification(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun skipEd() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun skipOp() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onAnswerToUnknownIntent(p0: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun onCustomSkill(p0: String?, p1: String?, p2: HashMap<String, String>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onDuerSkill(p0: String?, p1: String?, p2: HashMap<String, String>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLackScreen() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onMicOpenFailed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onASRInitError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onASRResult(p0: Boolean, p1: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onStateUserSpeaking() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onNetworkUnstable(p0: Int, p1: Int, p2: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onWakeupCommand(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showStateHint(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showVerboseHint(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onStateNeedWakeup() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onVoiceInputVolume(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showResultHint(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onStateSpeakFinished() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onMessageNotHandled(p0: String?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onStateWaitingInput() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -205,8 +167,6 @@ class ScrollingActivity : AppCompatActivity(), HomeAISdkClient, IScreen {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        app_bar.addOnOffsetChangedListener(AppBarLayout.BaseOnOffsetChangedListener<AppBarLayout?> { p0, p1 -> Log.d("appBar","offset$p1") })
-        app_bar.setLiftable(false)
         initAi()
     }
 
