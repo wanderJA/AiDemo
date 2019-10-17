@@ -9,6 +9,7 @@
     tools:showIn="@layout/activity_scrolling2">
 
     <TextView
+        android:id="@+id/des2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"

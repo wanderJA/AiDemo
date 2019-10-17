@@ -4,160 +4,91 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.ValueCallback
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
-import com.iqiyi.homeai.core.HomeAIEnv
-import com.iqiyi.homeai.core.HomeAISdk
-import com.iqiyi.homeai.core.HomeAISdkClient
-import com.iqiyi.homeai.core.player.IPlayerStateListener
-import com.iqiyi.homeai.core.player.IScreen
-import com.iqiyi.homeai.core.player.ItemDetail
-import com.iqiyi.homeai.core.player.ItemList
 import kotlinx.android.synthetic.main.activity_scrolling.*
-import java.util.*
+import kotlinx.android.synthetic.main.content_scrolling.*
+import org.json.JSONException
+import org.json.JSONObject
 
 
-class ScrollingActivity : AppCompatActivity(), HomeAISdkClient, IScreen {
-    override fun previous() {
+class ScrollingActivity : AppCompatActivity(), IVoiceAsrCallback {
+    override fun onReadyForSpeech(var1: Bundle?) {
+        appendLog("语音就绪")
     }
 
-    override fun isOn(): Boolean {
-        return true
+    override fun onBeginningOfSpeech() {
+        appendLog("检测到语音")
     }
 
-    override fun seek(p0: Boolean, p1: Int) {
+    override fun onRmsChanged(var1: Float) {
     }
 
-    override fun next() {
+    override fun onBufferReceived(var1: ByteArray?) {
     }
 
-    override fun selectItem(p0: Int): Boolean {
-        return false
+    override fun onEndOfSpeech() {
+        appendLog("检测到语音结束")
     }
 
-    override fun resume() {
+    override fun onError(var1: Int) {
+        appendLog("发生错误:$var1")
     }
 
-    override fun setResolution(p0: Boolean, p1: Int) {
+    override fun onResults(bundle: Bundle?) {
+        try {
+            val asrResult = bundle?.getStringArrayList(IVoiceAsrCallback.RESULTS_RECOGNITION)!![0]
+            appendLog("最终结果： $asrResult")
+        } catch (e: Throwable) {
+        }
+
     }
 
-    override fun onVoiceWakeup(p0: ValueCallback<Boolean>?) {
+    override fun onPartialResults(bundle: Bundle?) {
+        try {
+            val asrResult = bundle?.getStringArrayList(IVoiceAsrCallback.RESULTS_RECOGNITION)!![0]
+            appendLog("中间结果： $asrResult")
+        } catch (e: Throwable) {
+        }
+
     }
 
-    override fun navigateBackforward(p0: Int): Boolean {
-        return false
+    override fun onIntent(command: String?) {
+        try {
+            val json = JSONObject(command)
+            val type = json.optInt("type", 0)
+            var cmdType = ""
+            when (type) {
+                1 -> cmdType = "控制"
+                2 -> cmdType = "播放"
+                3 -> cmdType = "搜索结果"
+                4 -> cmdType = "网页展示"
+                5 -> cmdType = "导航"
+                6 -> cmdType = "度秘技能"
+                7 -> cmdType = "自定义技能"
+                8 -> cmdType = "只看他"
+                9 -> cmdType = "场景注册"
+                10 -> cmdType = "生活信息"
+                11 -> cmdType = "截图识别"
+                12 -> cmdType = "截图识别结果"
+                13 -> cmdType = "情节跳转"
+                14 -> cmdType = "频道节目单"
+                15 -> cmdType = "纯搜索意图"
+                16 -> cmdType = "明星信息"
+                else -> cmdType = "未知指令$type"
+            }
+            appendLog("指令结果: $cmdType")
+        } catch (e: JSONException) {
+            appendLog("解析指令失败")
+        }
+
     }
 
-    override fun isPlaying(): Boolean {
-        return false
-    }
-
-    override fun setPlayerStateListener(p0: IPlayerStateListener?) {
-    }
-
-    override fun playVideo(
-        p0: ItemDetail?,
-        p1: String?,
-        p2: String?,
-        p3: String?,
-        p4: MutableList<String>?
-    ) {
-    }
-
-    override fun showPage(p0: String?) {
-    }
-
-    override fun pause() {
-    }
-
-    override fun destroy() {
-    }
-
-    override fun volumnAdjust(p0: Boolean, p1: Float) {
-    }
-
-    override fun mute(p0: Boolean) {
-    }
-
-    override fun showSearchResult(p0: ItemList?, p1: Int, p2: Int) {
-    }
-
-    override fun switchPage(p0: Boolean, p1: Int) {
-    }
-
-    override fun onVoiceSleep(p0: ValueCallback<Boolean>?) {
-    }
-
-    override fun stop() {
-    }
-
-    override fun playEpisode(p0: Int) {
-    }
-
-    override fun showNotification(p0: String?) {
-    }
-
-    override fun skipEd() {
-    }
-
-    override fun skipOp() {
-    }
-
-    override fun onAnswerToUnknownIntent(p0: String?): Boolean {
-        return true
-    }
-
-    override fun onCustomSkill(p0: String?, p1: String?, p2: HashMap<String, String>?) {
-    }
-
-    override fun onDuerSkill(p0: String?, p1: String?, p2: HashMap<String, String>?) {
-    }
-
-    override fun onLackScreen() {
-    }
-
-    override fun onMicOpenFailed() {
-    }
-
-    override fun onASRInitError() {
-    }
-
-    override fun onASRResult(p0: Boolean, p1: String?) {
-    }
-
-    override fun onStateUserSpeaking() {
-    }
-
-    override fun onNetworkUnstable(p0: Int, p1: Int, p2: String?) {
-    }
-
-    override fun onWakeupCommand(p0: String?) {
-    }
-
-    override fun showStateHint(p0: String?) {
-    }
-
-    override fun showVerboseHint(p0: String?) {
-    }
-
-    override fun onStateNeedWakeup() {
-    }
-
-    override fun onVoiceInputVolume(p0: Int) {
-    }
-
-    override fun showResultHint(p0: String?) {
-    }
-
-    override fun onStateSpeakFinished() {
-    }
-
-    override fun onMessageNotHandled(p0: String?, p1: Int) {
-    }
-
-    override fun onStateWaitingInput() {
+    private val tag = "ScrollingActivity"
+    private fun appendLog(line: String) {
+        Log.d(tag,line)
+        runOnUiThread { des.append(line+"\n") }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,28 +103,19 @@ class ScrollingActivity : AppCompatActivity(), HomeAISdkClient, IScreen {
 
     private fun initAi() {
 
-        HomeAIEnv.setAppAuth("demo", "chdemo_appsecret")
-        val speech = HomeAIEnv.ApiAuth()
-        speech.appId = "dmD1EE939C30061699"
-        speech.apiKey = "1BBF8CE2EA16B751B2D4C7FF56BF9003"
-        speech.secretKey = "baidu_speech_secretkey"
-        val tts = HomeAIEnv.ApiAuth()
-        tts.appId = "baidu_speech_appid"
-        tts.apiKey = "baidu_speech_appkey"
-        tts.secretKey = "baidu_speech_secretkey"
-        val duer = HomeAIEnv.ApiAuth()
-        duer.appId = "duer_appid"
-        duer.apiKey = "duer_appkey"
-        duer.secretKey = ""
-        HomeAIEnv.setBaiduAuth(speech, tts, duer)
-        HomeAIEnv.setAudioPlayerEnabled(true)
-
-        HomeAIEnv.addWakeupWord("小鹿小鹿") // 方法一
-        val homeAISdk = HomeAISdk.getInstance(this)
-        homeAISdk.setScreen(this)
-        homeAISdk.setClient(this)
-        homeAISdk.start()
+        ReaderAi.initAi(applicationContext)
+        fabOpen.setOnClickListener {    ReaderAi.voiceRecognition(applicationContext,this,false) }
+        fab.setOnClickListener {
+            releaseSearchAsr()
+        }
     }
+
+    private fun releaseSearchAsr() {
+        Log.d(tag, "leave search")
+        des.text = ""
+        ReaderAi.releaseRecognizer()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
