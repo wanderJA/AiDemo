@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_scrolling.*
@@ -13,7 +12,14 @@ import org.json.JSONException
 import org.json.JSONObject
 
 
-class ScrollingActivity : AppCompatActivity(), IVoiceAsrCallback {
+class ScrollingActivity : AppCompatActivity(), IVoiceAsrCallback, IVoiceWakeupCallback {
+    override fun onWakedUp(word: String?) {
+        appendLog("被唤醒：$word")
+        runOnUiThread {
+            ReaderAi.voiceRecognition(applicationContext, this, false)
+        }
+    }
+
     override fun onReadyForSpeech(var1: Bundle?) {
         appendLog("语音就绪")
     }
@@ -104,7 +110,11 @@ class ScrollingActivity : AppCompatActivity(), IVoiceAsrCallback {
     private fun initAi() {
 
         ReaderAi.initAi(applicationContext)
-        fabOpen.setOnClickListener {    ReaderAi.voiceRecognition(applicationContext,this,false) }
+        ReaderAi.setOnlyASR(false)
+        fabOpen.setOnClickListener {
+            ReaderAi.voiceWakeUp(applicationContext, this)
+//            ReaderAi.voiceRecognition(applicationContext,this,false)
+        }
         fab.setOnClickListener {
             releaseSearchAsr()
         }

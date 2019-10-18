@@ -298,6 +298,7 @@ object ReaderAi {
 
             override fun showPage(s: String) {
 
+
             }
 
             override fun showSearchResult(itemList: ItemList, i: Int, i1: Int, s: String) {
